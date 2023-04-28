@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.wallet">
+
+    <select id="getBalance">
+        select banlance from wallet where id=#{id} and user_id=#{user_id}
+    </select>
+
+
+    <update id="concume">
+        update wallet set banlance=banlance-100,type=2 where id=#{id} and user_id=#{user_id}
+    </update>
+
+    <update id="refund">
+        update wallet set banlance=banlance+20 where id=#{id} and user_id=#{user_id}
+    </update>
+
+
+    <resultMap id="walletdetail" type="com.xxxx.wallet.vo.walletDetail">
+        <id property="id" column="id"/>
+        <result property="user_id" column="user_id"/>
+        <result property="banlance" column="banlance"/>
+        <collection property="walletDetail" ofType="walletDetail">
+            <id property="id" column="id"/>
+            <result property="user_id" column="user_id"/>
+            <result property="type" column="type"/>
+            <result property="amount" column="amount"/>
+            <result property="create_date" column="create_date"/>
+        </collection>
+    </resultMap>
+
+    <select id="getWalletDetailListById" resultMap="walletdetail">
+        select m1.*,m2.type,m2.amount,m2.create_date
+        from wallet m1,walletdetail m2
+        where m1.#{id}=m2.id
+    </select>
+</mapper>
