@@ -1,11 +1,8 @@
 package com.xxxx.wallet.service;
 
-import com.xxxx.wallet.entities.Wallet;
 import com.xxxx.wallet.result.RespBean;
-import com.xxxx.wallet.vo.walletDetail;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public interface WalletService {
     RespBean getBalance(Long user_id, Long id);
@@ -16,4 +13,5 @@ public interface WalletService {
 
 
     RespBean getWalletDetailListById(Long id);
+
 }

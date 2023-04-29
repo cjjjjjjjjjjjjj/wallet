@@ -11,12 +11,14 @@ import java.math.BigDecimal;
 @RequestMapping("/wallet")
 public class WalletController {
 
+    //获取余额
     @Autowired
     private WalletServiceImpl walletService;
     @GetMapping("getBalance/{user_id}/{id}")
     public RespBean getBalance(@PathVariable Long user_id,@PathVariable Long id){
         return walletService.getBalance(user_id,id);
     }
+
 
     @PutMapping("/consume/{user_id}/{id}")
     public RespBean consume(@PathVariable Long user_id,@PathVariable Long id,BigDecimal amount){
